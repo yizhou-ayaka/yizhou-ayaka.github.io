@@ -1,0 +1,186 @@
+/* ============================================================
+   风吹雪 · 蓝白定制
+   主色：远山蓝 #2E5B86 / 雪青 #DCE9F5 / 纸白 #F4F8FC
+   ============================================================ */
+
+:root {
+  --snow-ink: #1D2B3A;
+  --snow-blue: #2E5B86;
+  --snow-blue-soft: #4A7FAE;
+  --snow-ice: #DCE9F5;
+  --snow-paper: #F4F8FC;
+}
+
+/* 标题用衬线字体，正文保持无衬线，读起来更有书的味道 */
+#site-title,
+#site-subtitle,
+.post-title,
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
+  letter-spacing: 0.02em;
+}
+
+/* 首页站名：拉开字距，像落款 */
+#site-title {
+  letter-spacing: 0.22em;
+  text-shadow: 0 2px 18px rgba(18, 40, 62, 0.35);
+}
+
+#site-subtitle {
+  letter-spacing: 0.08em;
+  opacity: 0.92;
+}
+
+/* 小屏：副标题允许换行，别被裁掉 */
+@media screen and (max-width: 768px) {
+  #page-header.full_page #site-info {
+    box-sizing: border-box;
+    padding: 0 18px;
+  }
+
+  #page-header #site-subtitle {
+    font-size: 1em;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  #page-header #site-title {
+    letter-spacing: 0.16em;
+  }
+}
+
+/* 首页横幅：中部压一层柔和暗角，让白色标题更稳 */
+#page-header.full_page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(18, 40, 62, 0.26), transparent 62%);
+  pointer-events: none;
+}
+
+#page-header.full_page #site-info {
+  position: relative;
+}
+
+/* 文章卡片：白纸、淡蓝描边、极轻的投影 */
+#recent-posts > .recent-post-item {
+  border: 1px solid rgba(46, 91, 134, 0.07);
+  box-shadow: 0 6px 24px rgba(46, 91, 134, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#recent-posts > .recent-post-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(46, 91, 134, 0.09);
+}
+
+/* 卡片内的文章标题 */
+#recent-posts .article-title:hover {
+  color: var(--snow-blue-soft);
+}
+
+/* 正文链接：细下划线，悬停加深 */
+#article-container a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(46, 91, 134, 0.35);
+  text-underline-offset: 3px;
+}
+
+#article-container a:hover {
+  text-decoration-color: var(--snow-blue-soft);
+  text-decoration-thickness: 1.5px;
+}
+
+/* 行内代码：雪青底，避免默认的粉红 */
+#article-container code:not([class]) {
+  background: rgba(46, 91, 134, 0.08);
+  color: var(--snow-blue);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+}
+
+/* 表格表头：淡蓝 */
+#article-container table th {
+  background: var(--snow-ice);
+  color: var(--snow-ink);
+}
+
+/* 引用块：左侧一根深蓝细线 */
+#article-container blockquote {
+  border-left: 3px solid var(--snow-blue-soft);
+  border-radius: 0 6px 6px 0;
+}
+
+/* 标签胶囊 */
+#article-container .tag-link,
+.post-tags a,
+#aside-content .card-tag-cloud a {
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#article-container .tag-link:hover,
+.post-tags a:hover,
+#aside-content .card-tag-cloud a:hover {
+  background: var(--snow-blue);
+  color: #fff;
+}
+
+/* 侧边栏卡片与正文卡片统一描边 */
+.card-widget {
+  border: 1px solid rgba(46, 91, 134, 0.06);
+}
+
+/* 公告图标：跟着主色走，不要一直晃 */
+#aside-content .card-announcement .fa-bullhorn {
+  color: var(--snow-blue);
+  animation: none;
+}
+
+/* 页脚：与纸白背景衔接 */
+#footer {
+  background: transparent;
+}
+
+#footer-wrap {
+  color: #66788a;
+}
+
+/* 深色模式：别让纸白和雪青发灰 */
+html[data-theme="dark"] {
+  --snow-ink: #E6EEF6;
+  --snow-blue: #8FB4D4;
+  --snow-blue-soft: #A9C6DE;
+  --snow-ice: rgba(143, 180, 212, 0.14);
+}
+
+html[data-theme="dark"] #recent-posts > .recent-post-item {
+  border-color: rgba(143, 180, 212, 0.08);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+html[data-theme="dark"] #article-container code:not([class]) {
+  background: rgba(143, 180, 212, 0.12);
+  color: #A9C6DE;
+}
+
+html[data-theme="dark"] #article-container a {
+  text-decoration-color: rgba(143, 180, 212, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #recent-posts > .recent-post-item,
+  #recent-posts > .recent-post-item:hover {
+    transform: none;
+    transition: none;
+  }
+}
