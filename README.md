@@ -48,8 +48,13 @@ description: 一句话摘要，会显示在首页卡片上。
 | `_config.yml` | 站点标题、作者、网址、部署配置 |
 | `_config.butterfly.yml` | 主题：导航、配色、字体、搜索、侧边栏 |
 | `source/css/custom.css` | 蓝白配色的细节调整 |
-| `source/img/banner.svg` | 首页横幅（雪与风） |
+| `source/img/banner.svg` | 内页横幅（雪与风） |
+| `source/video/ayaka-banner.mp4` | 首页动态壁纸（1080p 压缩版，约 1.1MB） |
+| `source/img/ayaka-banner-poster.jpg` | 动态壁纸封面图（视频加载前/减少动态效果时显示） |
+| `source/js/ayaka-bg.js` | 首页动态壁纸加载脚本 |
 | `source/img/avatar.svg` / `favicon.svg` | 头像与站点图标 |
+
+> 动态壁纸原视频（4090×2300）在 `C:\Users\华硕\Downloads\神里绫华壁纸\`，仓库里只保存压缩后的网页版本。需要更换时，把新视频压成 1080p H.264 并替换 `source/video/ayaka-banner.mp4` 即可。
 
 ## 发布到 GitHub Pages
 

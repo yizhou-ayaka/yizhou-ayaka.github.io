@@ -66,7 +66,7 @@ disable_top_img: false
 default_top_img: /img/banner.svg
 
 # The banner image of index page
-index_img: /img/banner.svg
+index_img: /img/ayaka-banner-poster.jpg
 
 # The banner image of archive page
 archive_img: /img/banner.svg
@@ -1072,7 +1072,7 @@ inject:
   head:
     - <link rel="stylesheet" href="/css/custom.css">
   bottom:
-    # - <script src="xxxx"></script>
+    - <script src="/js/ayaka-bg.js" defer></script>
 
 # CDN Settings
 # Don't modify the following settings unless you know how they work

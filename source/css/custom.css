@@ -33,7 +33,8 @@
 
 #site-subtitle {
   letter-spacing: 0.08em;
-  opacity: 0.92;
+  opacity: 0.95;
+  text-shadow: 0 2px 12px rgba(8, 20, 32, 0.7);
 }
 
 /* 小屏：副标题允许换行，别被裁掉 */
@@ -57,17 +58,42 @@
   }
 }
 
-/* 首页横幅：中部压一层柔和暗角，让白色标题更稳 */
+/* 首页横幅：动态壁纸 + 暗角，让白色标题更清晰 */
+#page-header.full_page {
+  position: relative;
+  overflow: hidden;
+}
+
+.ayaka-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% center;
+  z-index: 0;
+  pointer-events: none;
+}
+
 #page-header.full_page::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(18, 40, 62, 0.26), transparent 62%);
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(8, 20, 32, 0.5), rgba(8, 20, 32, 0) 32%),
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(12, 28, 44, 0.5),
+      rgba(12, 28, 44, 0.15) 60%,
+      transparent 80%
+    );
   pointer-events: none;
 }
 
-#page-header.full_page #site-info {
-  position: relative;
+#page-header.full_page #site-info,
+#page-header.full_page #scroll-down {
+  z-index: 2;
 }
 
 /* 文章卡片：白纸、淡蓝描边、极轻的投影 */
