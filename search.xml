@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>用 Hexo + Butterfly 搭一个蓝白色的个人博客</title>
+    <url>/2026/11/09/hexo-butterfly-notes/</url>
+    <content><![CDATA[<p>这篇笔记记录「风吹雪」是怎么搭起来的。如果你也想有一个自己的写作角落，可以照着走一遍。</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>只需要 Node.js 和 Git。我使用的是 Node 20：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v   <span class="comment"># v20.19.5</span></span><br><span class="line">npm -v    <span class="comment"># 10.8.2</span></span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化-Hexo"><a href="#初始化-Hexo" class="headerlink" title="初始化 Hexo"></a>初始化 Hexo</h2><p>在一个空目录里执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npx hexo-cli init .</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>完成后会得到 Hexo 的标准目录结构：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>source/_posts</code></td>
+<td>文章</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>页面、图片、自定义静态资源</td>
+</tr>
+<tr>
+<td><code>themes</code> &#x2F; <code>node_modules</code></td>
+<td>主题</td>
+</tr>
+<tr>
+<td><code>_config.yml</code></td>
+<td>站点配置</td>
+</tr>
+<tr>
+<td><code>_config.butterfly.yml</code></td>
+<td>主题配置</td>
+</tr>
+</tbody></table>
+<h2 id="安装-Butterfly"><a href="#安装-Butterfly" class="headerlink" title="安装 Butterfly"></a>安装 Butterfly</h2><p>Butterfly 需要 Pug 和 Stylus 渲染器，搜索和部署也一并装上：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-theme-butterfly hexo-renderer-pug hexo-renderer-stylus \</span><br><span class="line">  hexo-generator-searchdb hexo-wordcount hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>然后把主题自带的配置复制到站点根目录，方便随时修改：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> node_modules/hexo-theme-butterfly/_config.yml _config.butterfly.yml</span><br></pre></td></tr></table></figure>
+
+<p>最后把站点配置里的主题改成 <code>butterfly</code>。</p>
+<h2 id="配色：蓝与白"><a href="#配色：蓝与白" class="headerlink" title="配色：蓝与白"></a>配色：蓝与白</h2><p>Butterfly 把主题色集中在 <code>theme_color</code> 里。我给「风吹雪」定的主色是远山蓝 <code>#2E5B86</code>，辅以雪青 <code>#DCE9F5</code> 和纸白 <code>#F4F8FC</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme_color:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">main:</span> <span class="string">&quot;#2E5B86&quot;</span></span><br><span class="line">  <span class="attr">paginator:</span> <span class="string">&quot;#4A7FAE&quot;</span></span><br><span class="line">  <span class="attr">text_selection:</span> <span class="string">&quot;#BBD5EA&quot;</span></span><br><span class="line">  <span class="attr">link_color:</span> <span class="string">&quot;#2E5B86&quot;</span></span><br><span class="line">  <span class="attr">hr_color:</span> <span class="string">&quot;#D3E2F0&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>标题换成宋体，正文保持无衬线，算是给这个偏文字的博客一点书卷气。细节都放在 <code>source/css/custom.css</code> 里，通过 <code>inject</code> 引入。</p>
+<h2 id="部署到-GitHub-Pages"><a href="#部署到-GitHub-Pages" class="headerlink" title="部署到 GitHub Pages"></a>部署到 GitHub Pages</h2><ol>
+<li>在 GitHub 新建仓库 <code>yizhou-ayaka.github.io</code></li>
+<li>把博客源文件推送到仓库的 <code>main</code> 分支</li>
+<li><code>_config.yml</code> 中配置部署目标：</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/yizhou-ayaka/yizhou-ayaka.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>执行部署：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run deploy</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在仓库的 <strong>Settings → Pages</strong> 里，把发布分支选为 <code>gh-pages</code></li>
+</ol>
+<p>之后每次写完文章，<code>git push</code> 保存源文件，再 <code>npm run deploy</code> 发布即可。</p>
+<h2 id="日常写作"><a href="#日常写作" class="headerlink" title="日常写作"></a>日常写作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npx hexo new post <span class="string">&quot;文章标题&quot;</span>   <span class="comment"># 新建文章</span></span><br><span class="line">npm run server                 <span class="comment"># 本地预览 http://localhost:4000</span></span><br><span class="line">npm run clean                  <span class="comment"># 清理缓存</span></span><br><span class="line">npm run build                  <span class="comment"># 生成静态文件</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Hexo 的好处是把写作和网站分开：文章是 Markdown，样式交给主题，发布是一条命令。剩下的时间，就留给写本身。</p>
+]]></content>
+      <categories>
+        <category>技术笔记</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Butterfly</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>风吹雪</title>
+    <url>/2026/11/09/wind-and-snow/</url>
+    <content><![CDATA[<p>我以前有过好几个博客。</p>
+<p>第一个是中学时用免费空间搭的，背景是一张模糊的动漫图，文章只有三篇，其中两篇是「测试」。第二个坚持得久一些，写了半年，后来忙起来，登录都忘了。再后来社交平台越来越方便，想说什么随手就发了，博客慢慢变成了一个舍不得删、也打不开的旧地址。</p>
+<p>现在重新搭一个，倒不是觉得社交平台不好，只是有些东西不太适合放在那里。技术笔记需要代码高亮、目录和可以随时修改的正文；而一些没想清楚的话，也不该急着被时间线推走。博客的好处是它慢，文章躺在那里，不催人看，也不催人回应。你可以隔半年回来改一个错别字，或者干脆删掉。</p>
+<p>「风吹雪」这个名字来自一种天气。风把雪吹起来，看不清前路，但世界很安静。写东西大概也是这样，很多想法一开始是散的，写着写着才慢慢落下来。</p>
+<p>我不知道这个博客能写多久。也许和以前一样，也许会更久一点。但至少此刻，它是我想写下来的地方。</p>
+<p>如果你刚好路过，欢迎随便看看。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>写作</tag>
+      </tags>
+  </entry>
+</search>
