@@ -113,3 +113,4 @@ deploy:
   repo: https://github.com/yizhou-ayaka/yizhou-ayaka.github.io.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+  ignore_hidden: false
